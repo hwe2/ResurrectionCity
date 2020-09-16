@@ -131,7 +131,7 @@
     this.gameInstance = null;
     this.polyfill = null;
     this.didNotifyUnity = false;
-    this.isARSupported = true;//false;
+    this.isARSupported = false;
     this.isVRSupported = false;
     this.onInputEvent = null;
     this.BrowserObject = null;
@@ -156,7 +156,7 @@
     });
 
     navigator.xr.isSessionSupported('immersive-ar').then((supported) => {
-      this.isARSupported = true;//supported;
+      this.isARSupported = supported;
       if (document.body.dataset.unityLoaded)
       {
         document.dispatchEvent(new CustomEvent('onARSupportedCheck', { detail:{supported:this.isARSupported} }));
@@ -184,10 +184,10 @@
   }
 
   XRManager.prototype.onRequestARSession = function () {
-    //if (!this.isARSupported) return;
+    if (!this.isARSupported) return;
     navigator.xr.requestSession('immersive-ar', {
-      requiredFeatures: ['local-floor'] // TODO: Get this value from Unity
-      //optionalFeatures: ['hit-test']
+      requiredFeatures: ['local-floor'], // TODO: Get this value from Unity
+      optionalFeatures: ['hand-tracking', 'hit-test']
     }).then(async (session) => {
       session.isImmersive = true;
       session.isInSession = true;
@@ -200,8 +200,8 @@
   XRManager.prototype.onRequestVRSession = function () {
     if (!this.isVRSupported) return;
     navigator.xr.requestSession('immersive-vr', {
-      requiredFeatures: ['local-floor'] // TODO: Get this value from Unity
-      //optionalFeatures: ['hand-tracking']
+      requiredFeatures: ['local-floor'], // TODO: Get this value from Unity
+      optionalFeatures: ['hand-tracking']
     }).then(async (session) => {
       session.isImmersive = true;
       session.isInSession = true;
