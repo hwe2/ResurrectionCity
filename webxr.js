@@ -186,8 +186,8 @@
   XRManager.prototype.onRequestARSession = function () {
     //if (!this.isARSupported) return;
     navigator.xr.requestSession('immersive-ar', {
-      requiredFeatures: ['local-floor'], // TODO: Get this value from Unity
-      optionalFeatures: ['hit-test']
+      requiredFeatures: ['local-floor'] // TODO: Get this value from Unity
+      //optionalFeatures: ['hit-test']
     }).then(async (session) => {
       session.isImmersive = true;
       session.isInSession = true;
@@ -200,8 +200,8 @@
   XRManager.prototype.onRequestVRSession = function () {
     if (!this.isVRSupported) return;
     navigator.xr.requestSession('immersive-vr', {
-      requiredFeatures: ['local-floor'], // TODO: Get this value from Unity
-      optionalFeatures: ['hand-tracking']
+      requiredFeatures: ['local-floor'] // TODO: Get this value from Unity
+      //optionalFeatures: ['hand-tracking']
     }).then(async (session) => {
       session.isImmersive = true;
       session.isInSession = true;
