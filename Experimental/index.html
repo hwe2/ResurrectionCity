@@ -3,27 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | %UNITY_WEB_NAME%</title>
-    <meta name="description" content="%UNITY_CUSTOM_DESCRIPTION%">
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-    <script src="TemplateData/UnityProgress.js"></script>
-    <script src="%UNITY_WEBGL_LOADER_URL%"></script>
-    <script>
-      UnityLoader.compatibilityCheck = function (unityInstance, onsuccess, onerror) {
-        if (!UnityLoader.SystemInfo.hasWebGL) {
-          unityInstance.popup('Your browser does not support WebGL',
-            [{text: 'OK', callback: onerror}]);
-        } else {
-          onsuccess();
-        }
-      }
-      var unityInstance = UnityLoader.instantiate("unityContainer", "%UNITY_WEBGL_BUILD_URL%", {onProgress: UnityProgress});
-    </script>
+    <title>Unity WebGL Player | ResurrectionCity</title>
   </head>
-  <body>
-    <div class="webgl-content" style="width: 100%; height: 100%">
-      <div id="unityContainer" style="width: 100%; height: 100%"></div>
-    </div>
+  <body style="text-align: center">
+    <canvas id="unity-canvas" style="width: 960px; height: 600px; background: #231F20"></canvas>
+    <script src="Build/ResurrectionCity Simple WebAR Build.loader.js"></script>
+    <script>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/ResurrectionCity Simple WebAR Build.data.br",
+        frameworkUrl: "Build/ResurrectionCity Simple WebAR Build.framework.js.br",
+        codeUrl: "Build/ResurrectionCity Simple WebAR Build.wasm.br",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "CWRU",
+        productName: "ResurrectionCity",
+        productVersion: "1.0",
+      });
+    </script>
   </body>
 </html>
